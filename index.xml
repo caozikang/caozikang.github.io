@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>如需转载请标明出处或请联系作者</copyright>
-    <lastBuildDate>Sun, 15 Apr 2018 10:50:33 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Apr 2018 17:53:09 +0800</lastBuildDate>
     
 	<atom:link href="https://caozikang.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Windows加载NFS</title>
+      <link>https://caozikang.github.io/windows%E5%8A%A0%E8%BD%BDnfs/</link>
+      <pubDate>Sun, 15 Apr 2018 17:53:09 +0800</pubDate>
+      
+      <guid>https://caozikang.github.io/windows%E5%8A%A0%E8%BD%BDnfs/</guid>
+      <description>如何在 Windows Server 2012 上加载 Linux 上的 NFS 共享
+跨系统的集成从来都不是一蹴而就的。看看这个步骤，可以省去N个小时。
+==以下操作在Windows Server端==
+1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager Features 里选择 Client for NFS，重启 OS。 2.运行Regedit，定位到分支： HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default
+新建DWORD 32键值，
+名为：AnonymousUID 值为：0
+名为：AnonymousGID 值为：0
+3.执行命令mount NFS报错“Network Error - 53”： mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:
+C:\Users\Administrator&amp;gt;mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W: Network Error - 53
+Type &amp;lsquo;NET HELPMSG 53&amp;rsquo; for more information.</description>
+    </item>
     
     <item>
       <title>360云盘的秒传</title>

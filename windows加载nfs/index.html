@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>360云盘的秒传 // 曹子康的个人博客</title>
+    <title>Windows加载NFS // 曹子康的个人博客</title>
 
         <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -9,11 +9,11 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="">
-        <meta property="og:title" content="360云盘的秒传" />
+        <meta property="og:title" content="Windows加载NFS" />
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://caozikang.github.io/360%E4%BA%91%E7%9B%98/" />
+    <meta property="og:url" content="https://caozikang.github.io/windows%E5%8A%A0%E8%BD%BDnfs/" />
     
 
     <link href="" rel="alternate" type="application/rss+xml" title="曹子康的个人博客" />
@@ -52,34 +52,112 @@
     <div class="article-inner">
         
         <header class="article-header">
-            <h1 class="article-title" itemprop="name">360云盘的秒传</h1>
+            <h1 class="article-title" itemprop="name">Windows加载NFS</h1>
         </header>
         
         <div class="article-meta">
-            <a href="/360%E4%BA%91%E7%9B%98/" class="article-date">
-                <time datetime='2018-04-15T10:50:33.000&#43;08:00' itemprop="datePublished">2018-04-15</time>
+            <a href="/windows%E5%8A%A0%E8%BD%BDnfs/" class="article-date">
+                <time datetime='2018-04-15T17:53:09.000&#43;08:00' itemprop="datePublished">2018-04-15</time>
             </a>
             
             
             
         </div>
         <div class="article-entry" itemprop="articleBody">
-            <p>360云盘“复活”之后的定位还是比较明确的，用于商务和团队协作。
-<a href="https://yunpan.360.cn/vip/product/">套餐价格</a></p>
+            <p>如何在 Windows Server 2012 上加载 Linux 上的 NFS 共享</p>
 
-<p>实测通过30M移动宽带上传到360云盘，1G的文件耗时30分钟，每秒600KBps。
-从360云盘下载到阿里云的速度每秒2MBps左右，比较理想。</p>
+<p>跨系统的集成从来都不是一蹴而就的。看看这个步骤，可以省去N个小时。</p>
 
-<p>问题在于：</p>
+<p>==以下操作在Windows Server端==</p>
 
-<p>某些人上传的大文件是损坏的，但是360云盘的“秒传”一看，这个文件在360云端有啊，所以直接放上去了。
-不让我上传新的覆盖。。。</p>
+<p>1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager
+Features 里选择 Client for NFS，重启 OS。
+<img src="https://s1.ax2x.com/2018/04/15/ks9l3.png" alt="Client for NFS" /></p>
 
-<p><img src="https://s1.ax2x.com/2018/04/15/kjpjz.png" alt="嗯，就是它" /></p>
+<p>2.运行Regedit，定位到分支：
+HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default</p>
 
-<p>解决方法：给大文件再加一层压缩，避免秒传识别。</p>
+<p>新建DWORD 32键值，</p>
 
-<p>希望360能改进，给用户一个提示说这个文件在云端找到并默认使用了秒传的版本，允许选择重新从本地上传。</p>
+<p>名为：AnonymousUID 值为：0</p>
+
+<p>名为：AnonymousGID 值为：0</p>
+
+<p>3.执行命令mount NFS报错“Network Error - 53”：
+mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:</p>
+
+<p>C:\Users\Administrator&gt;mount -o mtype=soft retry=10 timeout=6 casesensitive=yes
+anon 172.31.4.144:/NFS/nfs W:
+Network Error - 53</p>
+
+<p>Type &lsquo;NET HELPMSG 53&rsquo; for more information.</p>
+
+<p>解决方法：</p>
+
+<p>==以下操作在Linux NFS Server端==</p>
+
+<ol>
+<li>添加权限，修改文件：
+[root@dc3 ~]# nano /etc/exports</li>
+</ol>
+
+<p>添加一行:</p>
+
+<p>/NFS/nfs 172.31.0.0/16(rw,sync)</p>
+
+<ol>
+<li>更新权限</li>
+</ol>
+
+<p>[root@dc3 ~]# exportfs -a</p>
+
+<ol>
+<li>关闭防火墙</li>
+</ol>
+
+<p>[root@dc3 ~]# iptables -F</p>
+
+<ol>
+<li>重启NFS服务</li>
+</ol>
+
+<p>[root@dc3 ~]# systemctl restart nfs.service</p>
+
+<ol>
+<li>修改网络连接的高级属性，调整NFS顺序</li>
+</ol>
+
+<p>Network Connections ==&gt; Change adapter setting ==&gt; 按 ALT 显示菜单</p>
+
+<p><img src="https://s1.ax2x.com/2018/04/15/ks5vp.png" alt="Advanced Setting" /></p>
+
+<p>将 NFS Network 移动到 Microsoft Windows Network 之前。</p>
+
+<p><img src="https://s1.ax2x.com/2018/04/15/ksBBK.png" alt="Provider Order" /></p>
+
+<p>测试：</p>
+
+<p>==以下操作在Windows Server端==</p>
+
+<p>成功列出 NFS Server 的访问列表</p>
+
+<p>C:\Users\Administrator&gt;showmount -e 172.31.4.144</p>
+
+<p>Exports list on 172.31.4.144:</p>
+
+<p>/NFS/nfs                           172.31.0.0/16</p>
+
+<p>/NFS/nfs/viewer_data               172.31.4.142, 172.31.4.143</p>
+
+<p>/NFS/nfs/docs_data                 172.31.4.142, 172.31.4.143</p>
+
+<p>成功加载NFS的卷：</p>
+
+<p>C:\Users\Administrator&gt;mount -o anon 172.31.4.144:/NFS/nfs V:</p>
+
+<p>V: is now successfully connected to 172.31.4.144:/NFS/nfs</p>
+
+<p>The command completed successfully.</p>
 
         </div>
 
@@ -90,19 +168,29 @@
         
 
 
+        
+        <footer class="article-footer">
+            <ul class="article-tag-list">
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://caozikang.github.io//tags/nfs">NFS
+                    </a>
+                </li>
+                
+                <li class="article-tag-list-item">
+                    <a class="article-tag-list-link" href="https://caozikang.github.io//tags/mount">mount
+                    </a>
+                </li>
+                
+            </ul>
+        </footer>
         
     </div>
     <nav id="article-nav">
     
-    <a href="/windows%E5%8A%A0%E8%BD%BDnfs/" id="article-nav-newer" class="article-nav-link-wrap">
-        <div class="article-nav-title"><span>&lt;</span>&nbsp;
-            Windows加载NFS
-        </div>
-    </a>
     
-    
-    <a href="/%E7%AE%80%E5%8E%86/" id="article-nav-older" class="article-nav-link-wrap">
-        <div class="article-nav-title">简历&nbsp;<span>&gt;</span></div>
+    <a href="/360%E4%BA%91%E7%9B%98/" id="article-nav-older" class="article-nav-link-wrap">
+        <div class="article-nav-title">360云盘的秒传&nbsp;<span>&gt;</span></div>
     </a>
     
 </nav>

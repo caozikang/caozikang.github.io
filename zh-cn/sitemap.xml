@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://caozikang.github.io/windows%E5%8A%A0%E8%BD%BDnfs/</loc>
+    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://caozikang.github.io/360%E4%BA%91%E7%9B%98/</loc>
     <lastmod>2018-04-15T10:50:33+08:00</lastmod>
   </url>
@@ -38,7 +43,20 @@
   </url>
   
   <url>
+    <loc>https://caozikang.github.io/tags/mount/</loc>
+    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://caozikang.github.io/tags/nfs/</loc>
+    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://caozikang.github.io/tags/</loc>
+    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -54,7 +72,7 @@
   
   <url>
     <loc>https://caozikang.github.io/</loc>
-    <lastmod>2018-04-15T10:50:33+08:00</lastmod>
+    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
