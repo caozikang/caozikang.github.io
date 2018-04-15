@@ -70,9 +70,11 @@
 
 <p>==以下操作在Windows Server端==</p>
 
-<p>1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager
-Features 里选择 Client for NFS，重启 OS。
-<img src="https://s1.ax2x.com/2018/04/15/ks9l3.png" alt="Client for NFS" /></p>
+<p>1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager</p>
+
+<p>Features 里选择 Client for NFS，重启 OS。</p>
+
+<p><img src="https://s1.ax2x.com/2018/04/15/ks9l3.png" alt="Client for NFS" /></p>
 
 <p>2.运行Regedit，定位到分支：
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default</p>
@@ -83,12 +85,13 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default</p>
 
 <p>名为：AnonymousGID 值为：0</p>
 
-<p>3.执行命令mount NFS报错“Network Error - 53”：
-mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:</p>
+<p>3.执行命令mount NFS报错“Network Error - 53”：</p>
 
-<p>C:\Users\Administrator&gt;mount -o mtype=soft retry=10 timeout=6 casesensitive=yes
-anon 172.31.4.144:/NFS/nfs W:
-Network Error - 53</p>
+<p>mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:</p>
+
+<p>C:\Users\Administrator&gt;mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:</p>
+
+<p>Network Error - 53</p>
 
 <p>Type &lsquo;NET HELPMSG 53&rsquo; for more information.</p>
 
@@ -96,36 +99,27 @@ Network Error - 53</p>
 
 <p>==以下操作在Linux NFS Server端==</p>
 
-<ol>
-<li>添加权限，修改文件：
-[root@dc3 ~]# nano /etc/exports</li>
-</ol>
+<p>1.添加权限，修改文件：</p>
+
+<p>[root@dc3 ~]# nano /etc/exports</p>
 
 <p>添加一行:</p>
 
 <p>/NFS/nfs 172.31.0.0/16(rw,sync)</p>
 
-<ol>
-<li>更新权限</li>
-</ol>
+<p>2.更新权限</p>
 
 <p>[root@dc3 ~]# exportfs -a</p>
 
-<ol>
-<li>关闭防火墙</li>
-</ol>
+<p>3.关闭防火墙</p>
 
 <p>[root@dc3 ~]# iptables -F</p>
 
-<ol>
-<li>重启NFS服务</li>
-</ol>
+<p>4.重启NFS服务</p>
 
 <p>[root@dc3 ~]# systemctl restart nfs.service</p>
 
-<ol>
-<li>修改网络连接的高级属性，调整NFS顺序</li>
-</ol>
+<p>5.修改网络连接的高级属性，调整NFS顺序</p>
 
 <p>Network Connections ==&gt; Change adapter setting ==&gt; 按 ALT 显示菜单</p>
 
@@ -135,7 +129,7 @@ Network Error - 53</p>
 
 <p><img src="https://s1.ax2x.com/2018/04/15/ksBBK.png" alt="Provider Order" /></p>
 
-<p>测试：</p>
+<p>测试通过：</p>
 
 <p>==以下操作在Windows Server端==</p>
 

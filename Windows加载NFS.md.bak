@@ -2,10 +2,7 @@
 title: "Windows加载NFS"
 date: 2018-04-15T17:53:09+08:00
 draft: true
-"tags": [
-      "NFS",
-      "mount",
-   ],
+"tags": ["NFS", "mount"]
 ---
 如何在 Windows Server 2012 上加载 Linux 上的 NFS 共享
 
@@ -14,7 +11,9 @@ draft: true
 ==以下操作在Windows Server端==
 
 1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager 
+
 Features 里选择 Client for NFS，重启 OS。
+
 ![Client for NFS](https://s1.ax2x.com/2018/04/15/ks9l3.png)
 
 2.运行Regedit，定位到分支：
@@ -27,10 +26,11 @@ HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default
 名为：AnonymousGID 值为：0
 
 3.执行命令mount NFS报错“Network Error - 53”：
+
 mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:
 
-C:\Users\Administrator>mount -o mtype=soft retry=10 timeout=6 casesensitive=yes
-anon 172.31.4.144:/NFS/nfs W:
+C:\Users\Administrator>mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:
+
 Network Error - 53
 
 Type 'NET HELPMSG 53' for more information.
@@ -40,6 +40,7 @@ Type 'NET HELPMSG 53' for more information.
 ==以下操作在Linux NFS Server端==
 
 1. 添加权限，修改文件：
+
 [root@dc3 ~]# nano /etc/exports
 
 添加一行:
