@@ -1,89 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://caozikang.github.io/windows%E5%8A%A0%E8%BD%BDnfs/</loc>
-    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
+    <loc>http://caozikang.github.io/wasstop/</loc>
+    <lastmod>2020-05-27T13:36:55+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://caozikang.github.io/360%E4%BA%91%E7%9B%98/</loc>
-    <lastmod>2018-04-15T10:50:33+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/%E7%AE%80%E5%8E%86/</loc>
-    <lastmod>2018-04-09T23:20:10+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/cv/</loc>
-    <lastmod>2018-04-09T17:46:48+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/about/</loc>
-    <lastmod>2018-04-07T23:34:23+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/categories/</loc>
-    <priority>0</priority>
+    <loc>http://caozikang.github.io/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://caozikang.github.io/en/categories/"
+                href="http://caozikang.github.io/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://caozikang.github.io/categories/"
+                href="http://caozikang.github.io/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://caozikang.github.io/tags/mount/</loc>
-    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/tags/nfs/</loc>
-    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://caozikang.github.io/tags/</loc>
-    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
-    <priority>0</priority>
+    <loc>http://caozikang.github.io/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://caozikang.github.io/en/tags/"
+                href="http://caozikang.github.io/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://caozikang.github.io/tags/"
+                href="http://caozikang.github.io/tags/"
                 />
   </url>
   
   <url>
-    <loc>https://caozikang.github.io/</loc>
-    <lastmod>2018-04-15T17:53:09+08:00</lastmod>
-    <priority>0</priority>
+    <loc>http://caozikang.github.io/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://caozikang.github.io/en/"
+                href="http://caozikang.github.io/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://caozikang.github.io/"
+                href="http://caozikang.github.io/"
                 />
+  </url>
+  
+  <url>
+    <loc>http://caozikang.github.io/%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%85%B3%E9%97%ADwas%E5%BA%94%E7%94%A8/</loc>
   </url>
   
 </urlset>

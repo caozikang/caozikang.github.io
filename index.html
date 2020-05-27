@@ -13,20 +13,20 @@
     <meta property="og:description" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://caozikang.github.io/" />
+    <meta property="og:url" content="http://caozikang.github.io/" />
     
 
-    <link href="https://caozikang.github.io/index.xml" rel="alternate" type="application/rss+xml" title="曹子康的个人博客" />
+    <link href="http://caozikang.github.io/index.xml" rel="alternate" type="application/rss+xml" title="曹子康的个人博客" />
     <link rel="shortcut icon" href="/favicon.png">
 
-    <link href="https://caozikang.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
-    <link href="https://caozikang.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+    <link href="http://caozikang.github.io/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="http://caozikang.github.io/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="https://caozikang.github.io/css/style.css">
+    <link rel="stylesheet" href="http://caozikang.github.io/css/style.css">
 
     <link href="http://gmpg.org/xfn/11" rel="profile">
     
-    <meta name="generator" content="Hugo 0.38.1" />
+    <meta name="generator" content="Hugo 0.71.1" />
 </head>
 
 <body>
@@ -35,7 +35,7 @@
     <div id="header-outer" class="outer">
         <div id="header-inner" class="inner">
             <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
-            <a id="logo" class="logo-text" href="https://caozikang.github.io/">曹子康的个人博客</a>
+            <a id="logo" class="logo-text" href="http://caozikang.github.io/">曹子康的个人博客</a>
             <nav id="main-nav">
                 
             </nav>
@@ -53,12 +53,12 @@
                 
                 
                 <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/windows%E5%8A%A0%E8%BD%BDnfs/">Windows加载NFS</a></h1>
+                    <h1 itemprop="name"><a class="article-title" href="/wasstop/">通过命令行关闭WAS应用</a></h1>
                 </header>
                 
                 <div class="article-meta">
-                    <a href="/windows%E5%8A%A0%E8%BD%BDnfs/" class="article-date">
-                        <time datetime='2018-04-15T17:53:09.000&#43;08:00' itemprop="datePublished">2018-04-15</time>
+                    <a href="/wasstop/" class="article-date">
+                        <time datetime='2020-05-27T13:36:55.000&#43;08:00' itemprop="datePublished">2020-05-27</time>
                     </a>
                     
                     
@@ -67,74 +67,20 @@
                 <div class="article-entry" itemprop="articleBody">
                     <p>
                         
-                    如何在 Windows Server 2012 上加载 Linux 上的 NFS 共享
-跨系统的集成从来都不是一蹴而就的。看看这个步骤，可以省去N个小时。
-==以下操作在Windows Server端==
-1.在控制面板， Turn Windows Feature On and Off 打开 Server Manager
-Features 里选择 Client for NFS，重启 OS。
-2.运行Regedit，定位到分支： HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default
-新建DWORD 32键值，
-名为：AnonymousUID 值为：0
-名为：AnonymousGID 值为：0
-3.执行命令mount NFS报错“Network Error - 53”：
-mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:
-C:\Users\Administrator&gt;mount -o mtype=soft retry=10 timeout=6 casesensitive=yes anon 172.31.4.144:/NFS/nfs W:
-Network Error - 53
-Type &lsquo;NET HELPMSG 53&rsquo; for more information.
+                    WAS Script script/appstop.sh内容如下：
+#‌!/bin/bash
+cd /data/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin ./wsadmin.sh -user wasadmin -password password -lang jython -f appstop.py exec bash
+appstop.py内容如下（位于： /data/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin路径下）
+#‌Starting the Registry Services application
+app_name = &lsquo;Help&rsquo;
+#‌Identify the application manager MBean for the server where the application resides, and assign it to the appManager variable
+appManager = AdminControl.queryNames(&lsquo;cell=oadmgrp01Cell01,node=oaconnp01Node01,type=ApplicationManager,process=InfraCluster_server1,*')
+print appManager
+#‌Starting the application now
+AdminControl.invoke(appManager, &lsquo;stopApplication&rsquo;, app_name)
                     </p>
                     <p class="article-more-link">
-                        <a href="/windows%E5%8A%A0%E8%BD%BDnfs/">Read More</a>
-                    </p>
-                </div>
-
-                
-                <footer class="article-footer">
-                    <ul class="article-tag-list">
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://caozikang.github.io//tags/nfs">NFS
-                            </a>
-                        </li>
-                        
-                        <li class="article-tag-list-item">
-                            <a class="article-tag-list-link" href="https://caozikang.github.io//tags/mount">mount
-                            </a>
-                        </li>
-                        
-                    </ul>
-                </footer>
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/360%E4%BA%91%E7%9B%98/">360云盘的秒传</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/360%E4%BA%91%E7%9B%98/" class="article-date">
-                        <time datetime='2018-04-15T10:50:33.000&#43;08:00' itemprop="datePublished">2018-04-15</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    360云盘“复活”之后的定位还是比较明确的，用于商务和团队协作。 套餐价格
-实测通过30M移动宽带上传到360云盘，1G的文件耗时30分钟，每秒600KBps。 从360云盘下载到阿里云的速度每秒2MBps左右，比较理想。
-问题在于：
-某些人上传的大文件是损坏的，但是360云盘的“秒传”一看，这个文件在360云端有啊，所以直接放上去了。 不让我上传新的覆盖。。。
-解决方法：给大文件再加一层压缩，避免秒传识别。
-希望360能改进，给用户一个提示说这个文件在云端找到并默认使用了秒传的版本，允许选择重新从本地上传。
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/360%E4%BA%91%E7%9B%98/">Read More</a>
+                        <a href="/wasstop/">Read More</a>
                     </p>
                 </div>
 
@@ -147,12 +93,12 @@ Type &lsquo;NET HELPMSG 53&rsquo; for more information.
                 
                 
                 <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/%E7%AE%80%E5%8E%86/">简历</a></h1>
+                    <h1 itemprop="name"><a class="article-title" href="/%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%85%B3%E9%97%ADwas%E5%BA%94%E7%94%A8/">通过命令行关闭WAS应用</a></h1>
                 </header>
                 
                 <div class="article-meta">
-                    <a href="/%E7%AE%80%E5%8E%86/" class="article-date">
-                        <time datetime='2018-04-09T23:20:10.000&#43;08:00' itemprop="datePublished">2018-04-09</time>
+                    <a href="/%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%85%B3%E9%97%ADwas%E5%BA%94%E7%94%A8/" class="article-date">
+                        <time datetime='0001-01-01T00:00:00.000&#43;00:00' itemprop="datePublished">0001-01-01</time>
                     </a>
                     
                     
@@ -161,116 +107,20 @@ Type &lsquo;NET HELPMSG 53&rsquo; for more information.
                 <div class="article-entry" itemprop="articleBody">
                     <p>
                         
-                    年龄：37岁
-位置：北京，中关村
-工作经验：10年以上
-电话：13611011791
-Email：caozikang@139.com
-教育背景
-2011.9-2013.7 北京航空航天大学经济管理学院
-MBA工商管理硕士（企业战略与市场营销方向）
-1995.9-1999.7 合肥工业大学 材料科学与工程系
-材料科学与工程专业 本科
-工作经历
-2007.12-2018.3 IBM中国开发中心 软件部
-协作解决方案 技术支持团队负责人(2017-2018)
-工作分配，流程制定，团队激励，NPS提升
-客户自助服务 项目经理(2013-2017)
-需求分析，计划制定，成本控制，社交媒体运营
-亚太地区 高级支持工程师(2007-2012)
-解决问题，报告缺陷，编写文档，培训新人
-2006.8-2007.12 索尼爱立信 信息系统 Infra 应用经理
-事件响应，业务需求，变更管理，与国外沟通
-2005.2-2006.7 通用电气医疗 亚洲信息技术部 公用协作工具 主管
-解决问题，项目管理，与全球沟通
-2001.8-2005.1 方正科技 信息管理部 OA运维 主管
-流程精简，ERP应用，技服培训考核
-1999.8-2001.7 东华诚信 软件部 OA工程师
-OA开发，现场实施，项目应标，ISO体系贯标
-志愿者经历
-2013.10-2014.7 北航经管学院 第一届本科生社会导师
-辅导两位品学兼优的大三同学 给予职业生涯规划，大数据技术，学业深造，软实力方面的指导
-自我评价
-英语CET 6级，TOEIC 675分，听说读写流利，有2个月海外工作经历，
-掌握云计算、大数据、人工智能、区块链等新技术趋势
-逻辑感出色，擅长梳理复杂的业务流程，具有优秀的文字能力与沟通协调能力，通过产品经理培训课程获得 Pragmatic Marketing Certified - Level III认证
-对于IT服务流程有深刻的认识和丰富实践经验，持有ITIL，IBM，微软，HP认证系统管理证书
-具有较强的信息整合与规划分析能力，能承载压力并驱动开发团队和关键项目向前推进。
+                    WAS Script script/appstop.sh内容如下：
+#‌!/bin/bash
+cd /data/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin ./wsadmin.sh -user wasadmin -password password -lang jython -f appstop.py exec bash
+appstop.py内容如下（位于： /data/opt/IBM/WebSphere/AppServer/profiles/Dmgr01/bin路径下）
+#‌Starting the Registry Services application
+app_name = &lsquo;Help&rsquo;
+#‌Identify the application manager MBean for the server where the application resides, and assign it to the appManager variable
+appManager = AdminControl.queryNames(&lsquo;cell=oadmgrp01Cell01,node=oaconnp01Node01,type=ApplicationManager,process=InfraCluster_server1,*')
+print appManager
+#‌Starting the application now
+AdminControl.invoke(appManager, &lsquo;stopApplication&rsquo;, app_name)
                     </p>
                     <p class="article-more-link">
-                        <a href="/%E7%AE%80%E5%8E%86/">Read More</a>
-                    </p>
-                </div>
-
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/cv/">ZiKang&#39;s Cv</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/cv/" class="article-date">
-                        <time datetime='2018-04-09T17:46:48.000&#43;08:00' itemprop="datePublished">2018-04-09</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    中文简历 Age:37 Mobile:13611011791 Location: Zhongguancun, Beijing Email: caozikang@139.com
-Educational Background
-2011.9-2013.7 Beihang University School of Economics and Management
-MBA
-Major courses:
-Manufacturing Management, Marketing, Service Marketing, Project Management
-Operations Management, Macroeconomics, Business English, Organizational Behavior,
-Logistics and supply chain management, Brand Management, Economic Law,
-Human Resource Management, Accounting, Information management and e-Commerce
-Working Experiences
-2007.12-2018.3 IBM China Development Lab L2 Support for Collaboration Solutions
-Technical Support Team Leader (2017-2018)
-Operation excellence, Process improve, Team motivation, NPS promotion
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/cv/">Read More</a>
-                    </p>
-                </div>
-
-                
-            </div>
-        </article>
-        
-        <article class="article article-type-post" itemscope itemprop="blogPost">
-            <div class="article-inner">
-                
-                
-                <header class="article-header">
-                    <h1 itemprop="name"><a class="article-title" href="/about/">About</a></h1>
-                </header>
-                
-                <div class="article-meta">
-                    <a href="/about/" class="article-date">
-                        <time datetime='2018-04-07T23:34:23.000&#43;08:00' itemprop="datePublished">2018-04-07</time>
-                    </a>
-                    
-                    
-                    
-                </div>
-                <div class="article-entry" itemprop="articleBody">
-                    <p>
-                        
-                    
-                    </p>
-                    <p class="article-more-link">
-                        <a href="/about/">Read More</a>
+                        <a href="/%E9%80%9A%E8%BF%87%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%85%B3%E9%97%ADwas%E5%BA%94%E7%94%A8/">Read More</a>
                     </p>
                 </div>
 
@@ -285,7 +135,7 @@ Operation excellence, Process improve, Team motivation, NPS promotion
     <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 曹子康的个人博客&nbsp;
+            &copy; 2020 曹子康的个人博客&nbsp;
             Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos">Minos</a>
         </div>
     </div>
